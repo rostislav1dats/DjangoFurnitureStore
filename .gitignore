@@ -1,3 +1,16 @@
-templatesDjango
+# python stuff 
+__pycache__/
+templatesDjango/
+DjangoFurnitureStoreVenv/
+.pylintrc
+.env
+
+# idea stuff
 .idea
 .git
+.vscode
+
+#django stuff
+migrations/
+media/
+db.sqlite3
