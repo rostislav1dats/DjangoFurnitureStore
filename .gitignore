@@ -14,3 +14,6 @@ DjangoFurnitureStoreVenv/
 migrations/
 media/
 db.sqlite3
+
+#my uselesss stuff 
+jquery-ajax.js
