@@ -1,13 +1,17 @@
 from django.shortcuts import render
+from goods.models import Categories
 
-def index(request):
+def view_index(request):
+    categories = Categories.objects.all()
+
     context = {
         'title': 'Home - головна',
         'content': 'Магазин мебелів HOME',
+        'categories': categories,
     }
     return render(request, 'main/index.html', context)
 
-def about(request): 
+def view_about(request): 
     context = {
         'title': 'Home - Інфо',
         'content': 'Про нас',

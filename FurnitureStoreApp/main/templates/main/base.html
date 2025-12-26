@@ -36,40 +36,40 @@
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                Інформація
+                                Information
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item  text-white" href="#">Доставка і оплата</a></li>
-                                <li><a class="dropdown-item  text-white" href="#">Контактна інформація</a></li>
-                                <li><a class="dropdown-item  text-white" href="{% url "main:about" %}">Про нас</a></li>
+                                <li><a class="dropdown-item  text-white" href="#">Delivery and pay</a></li>
+                                <li><a class="dropdown-item  text-white" href="#">Contact information</a></li>
+                                <li><a class="dropdown-item  text-white" href="{% url "main:about" %}">About us</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="carts/cart.html">Корзина</a>
+                            <a class="nav-link  text-white" href="carts/cart.html">Cart</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="users/login.html">Увійти</a>
+                            <a class="nav-link  text-white" href="users/login.html">Log in</a>
                         </li>
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                Мій профіль
+                                My profile
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>
-                                <li><a class="dropdown-item  text-white" href="users/profile.html">Особистий кабінет</a>
+                                <li><a class="dropdown-item  text-white" href="carts/cart.html">Cart</a></li>
+                                <li><a class="dropdown-item  text-white" href="users/profile.html">My profile</a>
                                 </li>
-                                <li><a class="dropdown-item  text-white" href="#">Адмін панель</a></li>
+                                <li><a class="dropdown-item  text-white" href="{% url 'admin:index' %}">Admin panel</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item  text-white" href="#">Вийти</a></li>
+                                <li><a class="dropdown-item  text-white" href="#">Log out</a></li>
                             </ul>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success text-white" type="submit">Пошук</button>
+                        <button class="btn btn-outline-success text-white" type="submit">Search</button>
                     </form>
                 </div>
             </div>
@@ -81,18 +81,14 @@
                 <div class="dropdown mb-2">
                     <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Каталог
+                        Catalog
                         <img class="mx-1" src="{% static "deps/icons/grid-fill.svg" %}" alt="Catalog Icon" width="16"
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Всі товари</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Кухня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Спальня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Вітальня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Офіс</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Фурнітура</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Декор</a></li>
+                        {% for category in categories %}
+                            <li><a class="dropdown-item text-white" href="{% url 'goods:catalog' %}">{{ category.name }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div>
@@ -112,11 +108,11 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <h3 class="text-center mb-4">Корзина</h3>
+                                <h3 class="text-center mb-4">Cart</h3>
                                 <div class="container" id="cart-items-container">
                                     <div class="card mb-3 text-bg-light shadow-lg">
                                         <div class="card-header">
-                                            <h5 class="card-title">Товар</h5>
+                                            <h5 class="card-title">Product</h5>
                                         </div>
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
@@ -151,13 +147,13 @@
                                     </div>
                                     <div class="card mb-3 shadow-lg">
                                         <div class="card-footer">
-                                            <p class="float-left">Загалом <strong>1</strong> товар(а) на сумму</p>
+                                            <p class="float-left">Total <strong>1</strong> product(s) count</p>
                                             <h4 class="float-left"><strong>100.00 $</strong></h4>
                                         </div>
                                     </div>
                                 </div>
                                 <a class="btn btn-dark" href="orders/create_order.html">
-                                    Оформити замовлення
+                                    Get order
                                 </a>
                             </div>
                         </div>
