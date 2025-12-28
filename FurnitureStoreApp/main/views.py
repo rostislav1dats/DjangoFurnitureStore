@@ -7,7 +7,7 @@ def view_index(request):
     }
     return render(request, 'main/index.html', context)
 
-def view_about(request): 
+def view_about(request):
     context = {
         'title': 'Home - Інфо',
         'content': 'Про нас',
