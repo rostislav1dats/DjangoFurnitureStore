@@ -1,15 +1,20 @@
 from django.core.paginator import Paginator
 from django.shortcuts import get_list_or_404, render
+
 from .models import Products
+from .utils import search_q
 
 
-def view_catalog(request, category_slug):
+def view_catalog(request, category_slug=None):
     page_number = request.GET.get('page', 1)
     on_sale = request.GET.get('on_sale', None)
     order_by = request.GET.get('order_by', None)
+    query = request.GET.get('q', None)
 
     if category_slug == 'all':
-        goods = Products.objects.all()
+        goods = Products.objects.select_related('category').all()
+    elif query:
+        goods = search_q(query)
     else:
         goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
 
@@ -17,7 +22,7 @@ def view_catalog(request, category_slug):
         goods = goods.filter(discount__gt=0)
     if order_by and order_by != 'default':
         goods = goods.order_by(order_by)
-    
+
     paginator = Paginator(goods, 3)
     current_page = paginator.page(int(page_number))
     elided_page_range = paginator.get_elided_page_range(current_page.number, on_each_side=2, on_ends=1)
